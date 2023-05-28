@@ -1,42 +1,37 @@
-import { useTimer } from "react-timer-hook";
+import dayjs from "dayjs";
 
-const MyTimer = ({ expiryTimestamp }) => {
-  const { seconds, minutes } = useTimer({
-    expiryTimestamp,
-    onExpire: () => console.warn("onExpire called"),
-  });
+const MyTimer = () => {
+
+
+  const newTime = dayjs().format("hhmm")
+
+  const result = newTime.match(/.{1,1}/g) || [];
+
 
   return (
     <div style={{ textAlign: "center" }}>
       <div style={{ fontSize: "20px" }}>
         <span
-          style={{
-            textAlign: "center",
-            fontSize: "0.75em",
-            color: "#fff",
-            background: "#1D2A53",
-            padding: "0.6rem",
-            borderRadius: "7px",
-            fontWeight: "600",
-            marginRight: "0.5rem",
-          }}
+          className="timerStyle"
         >
-          {minutes}
+          {result[0]}
         </span>
-        <span style={{ fontWeight: "600", fontSize: "0.75em" }}>:</span>
         <span
-          style={{
-            textAlign: "center",
-            fontSize: "0.75em",
-            color: "#fff",
-            background: "#1D2A53",
-            padding: "0.6rem",
-            borderRadius: "7px",
-            fontWeight: "600",
-            marginLeft: "0.5rem",
-          }}
+          className="timerStyle_1"
         >
-          {seconds}
+          {result[1]}
+        </span>
+        <span style={{ fontWeight: "600", fontSize: "0.75em", margin:"0 0.5rem 0 0.5rem" }}>:</span>
+
+        <span
+          className="timerStyle"
+        >
+          {result[2]}
+        </span>
+        <span
+          className="timerStyle"
+        >
+          {result[3]}
         </span>
       </div>
     </div>
