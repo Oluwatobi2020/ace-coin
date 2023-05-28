@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography, useMediaQuery } from "@mui/material";
 import RightPart from "../../assets/curved-section.png";
 import Wifi_logo from "../../assets/wifi.svg";
 import Chip from "../../assets/card-chip.svg";
@@ -8,6 +8,7 @@ import AppleLogo from "../../assets/apple-logo.svg";
 import Receipt from "../../assets/receipt.svg";
 
 const CreditCard = () => {
+    const matches = useMediaQuery('(min-width:1100px)');
   const companyLogo = (
     <div
       style={{
@@ -68,19 +69,23 @@ const CreditCard = () => {
     fontWeight: "600",
     color: "#1D2A53",
   };
+
+  const bg_1 = "linear-gradient(179.42deg, #FFFFFF -16.67%, rgba(255, 255, 255, 0.476299) 67.86%, rgba(255, 255, 255, 0) 144.73%)";
+  const bg_2 = "linear-gradient(179.42deg, #C4C9CC -16.67%, rgba(139, 174, 193, 0) 144.73%, rgba(193, 224, 241, 0.476299) 144.73%)";
   return (
-    <Box sx={{ width: "100%", position: "relative" }}>
-      <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
-        <img src={RightPart} alt="CardSection" style={{ width: "65%" }} />
-      </Box>
+    <Box sx={{ width: "100%", position: {lg:"relative", md:"relative", sm:"absolute"}}}>
+      {matches && <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
+        <img src={RightPart} alt="CardSection" className="creditCardBg" />
+      </Box>}
 
       <Box
         sx={{
           width: "170px",
           height: "250px",
           borderRadius: "15px",
+
           background:
-            "linear-gradient(179.42deg, #FFFFFF -16.67%, rgba(255, 255, 255, 0.476299) 67.86%, rgba(255, 255, 255, 0) 144.73%);",
+            !matches ? bg_2 : bg_1,
         }}
         className="card-box overlay"
       >
@@ -184,22 +189,24 @@ const CreditCard = () => {
         >
           <Grid sx={{ width: "100%" }}>
             <table style={{ width: "100%" }}>
-              <tr style={{ padding: "0 0 1rem 0" }}>
-                <td style={tableStyle1}>Company</td>
-                <td style={tableStyle2}>{companyLogo}</td>
-              </tr>
-              <tr style={{ padding: "1rem 0 1rem 0" }}>
-                <td style={tableStyle1}>Order Number</td>
-                <td style={tableStyle2}>{orderNumber}</td>
-              </tr>
-              <tr style={{ padding: "0 0 1rem 0" }}>
-                <td style={tableStyle1}>Product</td>
-                <td style={tableStyle2}>{product}</td>
-              </tr>
-              <tr style={{ padding: "0 0 1rem 0" }}>
-                <td style={tableStyle1}>VAT(20%)</td>
-                <td style={tableStyle2}>{vat}</td>
-              </tr>
+              <tbody>
+                <tr style={{ padding: "0 0 1rem 0" }}>
+                  <td style={tableStyle1}>Company</td>
+                  <td style={tableStyle2}>{companyLogo}</td>
+                </tr>
+                <tr style={{ padding: "1rem 0 1rem 0" }}>
+                  <td style={tableStyle1}>Order Number</td>
+                  <td style={tableStyle2}>{orderNumber}</td>
+                </tr>
+                <tr style={{ padding: "0 0 1rem 0" }}>
+                  <td style={tableStyle1}>Product</td>
+                  <td style={tableStyle2}>{product}</td>
+                </tr>
+                <tr style={{ padding: "0 0 1rem 0" }}>
+                  <td style={tableStyle1}>VAT(20%)</td>
+                  <td style={tableStyle2}>{vat}</td>
+                </tr>
+              </tbody>
             </table>
           </Grid>
         </Grid>
@@ -224,7 +231,9 @@ const CreditCard = () => {
               <span style={textStyle1}>USD</span>
             </Typography>
           </Grid>
-          <Grid sx={{ width: "30%", display:"flex", justifyContent:"flex-end" }}>
+          <Grid
+            sx={{ width: "30%", display: "flex", justifyContent: "flex-end" }}
+          >
             <img src={Receipt} alt="receipt" style={{ width: "50%" }} />
           </Grid>
         </Grid>

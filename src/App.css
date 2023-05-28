@@ -26,12 +26,46 @@ a {
   justify-content: center;
 }
 
+.ace-logo {
+  width: 40%;
+}
+
 .card-box {
   width: 100%;
   height: 100%;
   position: absolute;
   top: -15px;
   left: 119px;
+}
+
+.timerStyle {
+  text-align: center;
+  font-size: 0.75em;
+  color: #fff;
+  background: #1d2a53;
+  padding: 0.6rem;
+  border-radius: 7px;
+  font-weight: 600;
+  margin-right: 0.2rem;
+}
+.timerStyle_1 {
+  text-align: center;
+  font-size: 0.75em;
+  color: #fff;
+  background: #1d2a53;
+  padding: 0.6rem;
+  border-radius: 7px;
+  font-weight: 600;
+}
+.timerStyle2 {
+  text-align: center;
+  font-size: 0.75em;
+  color: #fff;
+  background: #1d2a53;
+  padding: 0.6rem;
+  border-radius: 7px;
+  font-weight: 600;
+  margin-left: 0.5rem;
 }
 
 .overlay {
@@ -41,4 +75,106 @@ a {
 
 .rotated {
   transform: rotate(90deg);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.customInputStyle {
+  color: #1d2a53 !important;
+  font-size: 1em !important;
+  font-weight: 800 !important;
+}
+
+.creditCardBg {
+  width: 65%;
+}
+
+
+@media screen and (max-width: 1290px) and (min-width: 1250px) {
+  .creditCardBg {
+    width: 80%;
+  }
+
+  .card-box {
+    left: 50px;
+  }
+}
+@media screen and (max-width: 1260px) and (min-width: 1200px) {
+  .creditCardBg {
+    width: 85%;
+  }
+
+  .card-box {
+    left: 33px;
+  }
+}
+@media screen and (max-width: 1200px) and (min-width: 1150px) {
+  .creditCardBg {
+    width: 80%;
+  }
+
+  .card-box {
+    left: 55px;
+  }
+}
+@media screen and (max-width: 1150px) and (min-width: 1090px) {
+  .creditCardBg {
+    width: 86%;
+  }
+
+  .card-box {
+    left: 39px;
+  }
+}
+@media screen and (max-width: 1090px) and (min-width: 990px) {
+  .card-box {
+    left: 10px;
+  }
+}
+@media screen and (max-width: 990px) and (min-width: 900px) {
+  .card-box {
+    left: 10px;
+  }
+}
+@media screen and (max-width: 990px) {
+  .homepage {
+    padding: 1rem;
+  }
+
+  .ace-logo {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .homepage {
+    padding: 1rem;
+  }
+
+  .ace-logo {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .ace-logo {
+    width: 60%;
+  }
+
+  .timerStyle {
+    font-size: 0.4em;
+    padding: 0.4rem;
+  }
+  .timerStyle_1 {
+    font-size: 0.4em;
+    padding: 0.4rem;
+  }
+  .timerStyle2 {
+    font-size: 0.4em;
+    padding: 0.4rem;
+  }
 }

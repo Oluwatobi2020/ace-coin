@@ -7,7 +7,7 @@ const Checkout = () => {
     <Box className="homepage">
       <Grid
         container
-        spacing={2}
+        spacing={1}
         sx={{ width: "100%", display: "flex", justifyContent: "center" }}
       >
         <CardComponent />

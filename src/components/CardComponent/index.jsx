@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Grid,
@@ -14,23 +14,57 @@ import CreditCard from "../CreditCard";
 import { IoIosKeypad } from "react-icons/io";
 import { BsFillPatchCheckFill } from "react-icons/bs";
 import MasterC from "../../assets/mscard.png";
+import { PatternFormat } from "react-number-format";
+import NumericFormatCustom from "../../shared/CustomInput";
 
 const CardComponent = () => {
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 1800);
+  const [cardDetails, setCardDetails] = useState({
+    cardNumber: "",
+    cardCvv: "",
+    cardExpiryMonth: "",
+    cardExpiryYear: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCardDetails({ ...cardDetails, [name]: value });
+  };
+
+  console.log("cardDetails", cardDetails);
+
+  const { cardCvv, cardExpiryMonth, cardExpiryYear, cardNumber } = cardDetails;
   return (
     <Box
-      sx={{ width: "80%", background: "#fff", padding: "5rem 5rem 1rem 5rem" }}
+      sx={{
+        width: "80%",
+        background: "#fff",
+        padding: {
+          lg: "5rem 5rem 1rem 5rem",
+          md: "2rem 2rem 1rem 2rem",
+          sm: "1.5rem",
+        },
+      }}
     >
       <Box
         sx={{
           width: "100%",
-          display: "flex",
-          alignItems: "flex-start",
+          display: { lg: "flex", md: "flex" },
+          alignItems: {
+            lg: "flex-start",
+            md: "flex-start",
+            sm: "normal",
+            xs: "normal",
+          },
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ width: "65%", padding:"1rem 0 0 0" }}>
+        <Box
+          sx={{
+            width: { lg: "65%", md: "65%", sm: "100%", xs: "100%" },
+            padding: "1rem 0 0 0",
+          }}
+        >
           <Grid
             container
             spacing={2}
@@ -39,13 +73,25 @@ const CardComponent = () => {
               alignItems: "center",
               justifyContent: "space-between",
               marginRight: "5rem",
+              padding: {
+                xs: "1rem 0 0 2rem",
+                sm: "1rem 0 0 2rem",
+                md: "1rem 0 0 0rem",
+                lg: "1rem 0 0 1rem",
+              },
             }}
           >
-            <Grid>
-              <img src={AceLogo} alt="AceCoin Logo" style={{ width: "60%" }} />
+            <Grid sx={{ width: "50%" }}>
+              <img src={AceLogo} alt="AceCoin Logo" className="ace-logo" />
             </Grid>
-            <Grid>
-              <MyTimer expiryTimestamp={time} />
+            <Grid
+              sx={{
+                width: "50%",
+                display: { xs: "flex" },
+                justifyContent: { xs: "flex-end" },
+              }}
+            >
+              <MyTimer />
             </Grid>
           </Grid>
 
@@ -67,7 +113,15 @@ const CardComponent = () => {
                 sm={12}
                 md={12}
                 lg={12}
-                sx={{ width: "100%", padding: "0 0 0.5rem 0" }}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
               >
                 {" "}
                 <Typography
@@ -82,7 +136,22 @@ const CardComponent = () => {
                   Card Number
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12} sx={{ width: "100%" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
+              >
                 {" "}
                 <Typography
                   sx={{
@@ -130,19 +199,46 @@ const CardComponent = () => {
             sx={{ width: "100%", padding: "0 0 1.5rem 0" }}
           >
             <Grid item container>
-              <Grid item sx={{ width: "100%" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                sx={{
+                  width: { lg: "100%", md: "100%", sm: "50%", xs: "50%" },
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
+              >
                 <TextField
                   fullWidth
-                  size="medium"
+                  value={cardNumber}
+                  onChange={handleChange}
+                  name="cardNumber"
                   InputProps={{
+                    inputComponent: NumericFormatCustom,
+                    inputProps: {
+                      component: PatternFormat,
+                    },
                     endAdornment: (
                       <InputAdornment position="end">
-                        {<BsFillPatchCheckFill size={20} color="#17A1FA" />}
+                        {cardNumber.length === 16 && (
+                          <BsFillPatchCheckFill size={20} color="#17A1FA" />
+                        )}
                       </InputAdornment>
                     ),
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={MasterC} alt="master-card-without-label" style={{width:"10%"}}/>
+                      <InputAdornment position="start" sx={{ width: "30%" }}>
+                        <img
+                          src={MasterC}
+                          alt="master-card-without-label"
+                          style={{ width: "20%" }}
+                        />
                       </InputAdornment>
                     ),
                   }}
@@ -169,7 +265,15 @@ const CardComponent = () => {
                 sm={12}
                 md={12}
                 lg={12}
-                sx={{ width: "100%", padding: "0 0 0.5rem 0" }}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
               >
                 {" "}
                 <Typography
@@ -184,7 +288,22 @@ const CardComponent = () => {
                   CVV Number
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12} sx={{ width: "100%" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
+              >
                 {" "}
                 <Typography
                   sx={{
@@ -210,6 +329,28 @@ const CardComponent = () => {
                       </InputAdornment>
                     ),
                   }}
+                  inputProps={{
+                    maxLength: 4,
+                    minLength: 3,
+                  }}
+                  name="cardCvv"
+                  value={cardCvv}
+                  onChange={handleChange}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      "& input": {
+                        textAlign: "center",
+                        borderRadius:"10px"
+                      },
+                      "& input:focus":{
+                        background:"#F0F5FF",
+                        border:"1px solid #025EFE"
+                      },
+                      fontSize: "1em",
+                      fontWeight: "700",
+                      color: "#1D2A53",
+                    },
+                  }}
                 />
               </Grid>
             </Grid>
@@ -232,7 +373,15 @@ const CardComponent = () => {
                 sm={12}
                 md={12}
                 lg={12}
-                sx={{ width: "100%", padding: "0 0 0.5rem 0" }}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
               >
                 {" "}
                 <Typography
@@ -247,7 +396,22 @@ const CardComponent = () => {
                   Expiry Date
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12} sx={{ width: "100%" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
+              >
                 {" "}
                 <Typography
                   sx={{
@@ -268,19 +432,95 @@ const CardComponent = () => {
                 width: "50%",
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-evenly",
+                justifyContent: "space-between",
               }}
             >
-              <Grid item sx={{ width: "43.5%", marginRight: "1rem" }}>
-                <TextField fullWidth size="medium" />
+              <Grid
+                item
+                xs={12}
+                sm={5}
+                md={6}
+                lg={5}
+                sx={{
+                  width: { lg: "43.5%", md: "20%", sm: "50%", xs: "20%" },
+                  marginRight: {
+                    lg: "1rem",
+                    md: "0.5rem",
+                    sm: "1rem",
+                    xs: "0",
+                  },
+                  marginBottom: { xs: "0.5rem" },
+                }}
+              >
+                <TextField
+                  fullWidth
+                  size="medium"
+                  name="cardExpiryMonth"
+                  value={cardExpiryMonth}
+                  onChange={handleChange}
+                  inputProps={{
+                    maxLength: 2,
+                  }}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      "& input": {
+                        textAlign: "center",
+                      },
+                      "& input:focus":{
+                        background:"#F0F5FF",
+                        border:"1px solid #025EFE"
+                      },
+                      fontSize: "1em",
+                      fontWeight: "700",
+                      color: "#1D2A53",
+                    },
+                  }}
+                />
               </Grid>
-              <Grid>
+              <Grid
+                sx={{
+                  display: { lg: "flex", md: "none", sm: "none", xs: "none" },
+                }}
+              >
                 <Typography sx={{ fontSize: "1em", fontWeight: "700" }}>
                   /
                 </Typography>
               </Grid>
-              <Grid item sx={{ width: "43.5%", marginLeft: "1rem" }}>
-                <TextField fullWidth size="medium" />
+              <Grid
+                item
+                xs={12}
+                sm={5}
+                md={5}
+                lg={5}
+                sx={{
+                  width: { lg: "43.5%", md: "20%", sm: "50%", xs: "20%" },
+                  marginLeft: { lg: "1rem", md: "0", sm: "0", xs: "0" },
+                }}
+              >
+                <TextField
+                  fullWidth
+                  size="medium"
+                  name="cardExpiryYear"
+                  value={cardExpiryYear}
+                  onChange={handleChange}
+                  inputProps={{
+                    maxLength: 2,
+                  }}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      "& input": {
+                        textAlign: "center",
+                      },
+                      "& input:focus":{
+                        background:"#F0F5FF",
+                        border:"1px solid #025EFE"
+                      },
+                      fontSize: "1em",
+                      fontWeight: "700",
+                      color: "#1D2A53",
+                    },
+                  }}
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -302,7 +542,15 @@ const CardComponent = () => {
                 sm={12}
                 md={12}
                 lg={12}
-                sx={{ width: "100%", padding: "0 0 0.5rem 0" }}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
               >
                 {" "}
                 <Typography
@@ -317,7 +565,22 @@ const CardComponent = () => {
                   Password
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={12} md={12} lg={12} sx={{ width: "100%" }}>
+              <Grid
+                item
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                sx={{
+                  width: "100%",
+                  padding: {
+                    lg: "0 0 0.5rem 0",
+                    md: "0 0 0.5rem 0",
+                    sm: "0 0 0 1rem",
+                    xs: "0 0 0 1rem",
+                  },
+                }}
+              >
                 {" "}
                 <Typography
                   sx={{
@@ -344,6 +607,22 @@ const CardComponent = () => {
                       </InputAdornment>
                     ),
                   }}
+                  name="password"
+                  onChange={handleChange}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      "& input": {
+                        textAlign: "left",
+                      },
+                      "& input:focus":{
+                        background:"#F0F5FF",
+                        border:"1px solid #025EFE"
+                      },
+                      fontSize: "1em",
+                      fontWeight: "700",
+                      color: "#1D2A53",
+                    },
+                  }}
                 />
               </Grid>
             </Grid>
@@ -357,9 +636,21 @@ const CardComponent = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              padding: {
+                lg: "0 0 0.5rem 0",
+                md: "0 0 0.5rem 0",
+                sm: "0 0 0 1rem",
+                xs: "0 0 0 1rem",
+              },
             }}
           >
-            <Grid item container sx={{ width: "100%" }}>
+            <Grid
+              item
+              container
+              sx={{
+                width: "100%",
+              }}
+            >
               <Button
                 variant="contained"
                 sx={{
@@ -367,7 +658,7 @@ const CardComponent = () => {
                   color: "#fff",
                   fontWeight: "700",
                   fontSize: "0.8em",
-                  width: "100%",
+                  width: { lg: "100%", md: "100%", sm: "100%", xs: "100%" },
                   padding: "1rem",
                   textTransform: "capitalize",
                 }}
@@ -378,13 +669,13 @@ const CardComponent = () => {
           </Grid>
         </Box>
 
-        <Box sx={{ width: "35%", display: "flex" }}>
+        <Box sx={{ width: { lg: "35%", md: "35%", sm: "0%", xs: "0%" } }}>
           <Grid
             container
             spacing={2}
             sx={{
               width: "100%",
-              display: "flex",
+              display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
               justifyContent: "flex-end",
             }}
           >
