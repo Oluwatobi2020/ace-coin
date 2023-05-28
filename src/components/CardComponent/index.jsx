@@ -30,7 +30,7 @@ const CardComponent = () => {
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ width: "65%" }}>
+        <Box sx={{ width: "65%", padding:"1rem 0 0 0" }}>
           <Grid
             container
             spacing={2}
