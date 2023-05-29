@@ -7,8 +7,8 @@ import SecondMasterCardLogo from "../../assets/mastercard.png";
 import AppleLogo from "../../assets/apple-logo.svg";
 import Receipt from "../../assets/receipt.svg";
 
-const CreditCard = () => {
-    const matches = useMediaQuery('(min-width:1100px)');
+const CreditCard = ({ cardDetails }) => {
+  const matches = useMediaQuery("(min-width:1100px)");
   const companyLogo = (
     <div
       style={{
@@ -31,9 +31,17 @@ const CreditCard = () => {
   const product = "Macbook Air";
   const vat = "$100.00";
 
+
+  const cardnumber = cardDetails.cardNumber;
+  const last5 = cardnumber.substring(cardnumber.length - 4);
+
+  const mask = cardnumber
+    .substring(0, cardnumber.length - 12)
+    .replace(/\d/g, "*");
+
   const cardHolderName = "Jonathan Michael";
-  const cardNumber = "**** 3456";
-  const expiryDate = "09/22";
+  const cardNumber = mask + " " + last5;
+  const expiryDate = `${cardDetails.cardExpiryMonth}/${cardDetails.cardExpiryYear}`;
 
   const tableStyle1 = {
     fontSize: "0.6em",
@@ -70,13 +78,24 @@ const CreditCard = () => {
     color: "#1D2A53",
   };
 
-  const bg_1 = "linear-gradient(179.42deg, #FFFFFF -16.67%, rgba(255, 255, 255, 0.476299) 67.86%, rgba(255, 255, 255, 0) 144.73%)";
-  const bg_2 = "linear-gradient(179.42deg, #C4C9CC -16.67%, rgba(139, 174, 193, 0) 144.73%, rgba(193, 224, 241, 0.476299) 144.73%)";
+  const bg_1 =
+    "linear-gradient(179.42deg, #FFFFFF -16.67%, rgba(255, 255, 255, 0.36) 144.73%, rgba(255, 255, 255, 0) 144.73%);";
+  const bg_2 =
+    "linear-gradient(179.42deg, #C4C9CC -16.67%, rgba(139, 174, 193, 0) 144.73%, rgba(193, 224, 241, 0.476299) 144.73%)";
   return (
-    <Box sx={{ width: "100%", position: {lg:"relative", md:"relative", sm:"absolute"}}}>
-      {matches && <Box sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}>
-        <img src={RightPart} alt="CardSection" className="creditCardBg" />
-      </Box>}
+    <Box
+      sx={{
+        width: "100%",
+        position: { lg: "relative", md: "relative", sm: "absolute" },
+      }}
+    >
+      {matches && (
+        <Box
+          sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+        >
+          <img src={RightPart} alt="CardSection" className="creditCardBg" />
+        </Box>
+      )}
 
       <Box
         sx={{
@@ -84,8 +103,7 @@ const CreditCard = () => {
           height: "250px",
           borderRadius: "15px",
 
-          background:
-            !matches ? bg_2 : bg_1,
+          background: !matches ? bg_2 : bg_1,
         }}
         className="card-box overlay"
       >
