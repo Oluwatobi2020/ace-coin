@@ -17,7 +17,7 @@ a {
 
 .homepage {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   background-image: url("./assets/blue-bg-1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -165,16 +165,10 @@ input::-webkit-inner-spin-button {
     width: 60%;
   }
 
-  .timerStyle {
-    font-size: 0.4em;
-    padding: 0.4rem;
+  .timerStyle, .timerStyle_1, .timerStyle2 {
+    font-size: 0.5em;
+    padding: 0.5rem;
+    border-radius: 5px;
   }
-  .timerStyle_1 {
-    font-size: 0.4em;
-    padding: 0.4rem;
-  }
-  .timerStyle2 {
-    font-size: 0.4em;
-    padding: 0.4rem;
-  }
+
 }

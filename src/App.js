@@ -1,10 +1,13 @@
-import './App.css';
-import Checkout from './components/Checkout';
+import "./App.css";
+import Checkout from "./components/Checkout";
+import { UiTriggersProvider } from "./components/context/UiTriggerContext";
 
 function App() {
   return (
     <div className="App">
-      <Checkout/>
+      <UiTriggersProvider>
+        <Checkout />
+      </UiTriggersProvider>
     </div>
   );
 }
