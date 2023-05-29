@@ -666,7 +666,12 @@ const CardComponent = () => {
                           background: "#F0F5FF",
                           border: "1px solid #025EFE",
                         },
-                        fontSize: "1em",
+                        fontSize: {
+                          lg: "1em",
+                          md: "1em",
+                          sm: "0.8em",
+                          xs: "0.8em",
+                        },
                         fontWeight: "700",
                         color: "#1D2A53",
                       },
